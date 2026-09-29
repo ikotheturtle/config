@@ -1,1 +1,0 @@
-../../../.config/dotfiles/niri/.config/waybar/modules/count-updates.sh
