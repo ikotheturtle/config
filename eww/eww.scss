@@ -1,0 +1,391 @@
+/* =========================================================
+ * COLORS
+ * ========================================================= */
+
+$bg: #2a211d;
+$bg-dark: #1c1714;
+$bg1: #30251f;
+$bg2: #3a2d26;
+$bg3: #44352c;
+
+$fg: #d6c4b8;
+$fg-bright: #e8d5c7;
+$fg-muted: #8f7c70;
+$border: #4a3a32;
+
+$accent: #d6c4b8;
+$accent-bright: #e8d5c7;
+
+$red: #c87878;
+$green: #8fa878;
+$yellow: #c9a86a;
+$blue: #8fa6b5;
+$purple: #aa8cae;
+$aqua: #8daeb0;
+$orange: #c08d62;
+
+/* =========================================================
+ * GLOBAL
+ * ========================================================= */
+
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+}
+
+window {
+  background: rgba(42, 33, 29);
+
+  border: 1px solid rgba(74, 58, 50, 0.95);
+  border-radius: 12px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(232, 213, 199, 0.035);
+}
+
+/* =========================================================
+ * CLOCK
+ * ========================================================= */
+
+.clock {
+  font-size: 70px;
+  font-weight: 700;
+
+  color: $fg-bright;
+
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.date {
+  font-size: 18px;
+  font-weight: 500;
+
+  color: $fg;
+
+  margin-top: 6px;
+
+  opacity: 0.9;
+
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================================
+ * CALENDAR
+ * ========================================================= */
+
+calendar {
+  color: $fg;
+
+  background: rgba(48, 37, 31, 0.92);
+
+  padding: 6px 14px;
+
+  border: 1px solid $border;
+  border-radius: 10px;
+}
+
+calendar:selected {
+  color: $bg-dark;
+
+  background: $accent-bright;
+
+  border-radius: 6px;
+}
+
+calendar:indeterminate {
+  color: $fg-muted;
+}
+
+/* =========================================================
+ * SEPARATOR
+ * ========================================================= */
+
+.line-sep {
+  background: $border;
+
+  min-height: 1px;
+
+  margin: 6px 0;
+
+  opacity: 0.65;
+}
+
+/* =========================================================
+ * MUSIC
+ * ========================================================= */
+
+.music-mini {
+  background: $bg1;
+
+  color: $fg;
+
+  padding: 6px 20px 12px;
+
+  border: 1px solid $border;
+  border-radius: 10px;
+
+  font-size: 20px;
+}
+
+.music-text {
+  color: $fg;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  opacity: 0.9;
+}
+
+.music-btn {
+  background: $bg1;
+
+  color: $fg;
+
+  padding: 6px 12px;
+
+  min-width: 36px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  font-size: 20px;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.music-btn:hover {
+  background: $bg2;
+  color: $fg-bright;
+}
+
+.music-btn:active {
+  background: $fg;
+  color: $bg-dark;
+}
+
+/* =========================================================
+ * AUDIO MIXER
+ * ========================================================= */
+
+.audio-mixer {
+  background: rgba(42, 33, 29, 0.97);
+
+  min-width: 260px;
+
+  padding: 20px 22px;
+
+  border: 1px solid $border;
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.audio-mixer label {
+  color: $fg;
+
+  font-size: 14px;
+
+  margin-bottom: 2px;
+}
+
+/* =========================================================
+ * SLIDER
+ * ========================================================= */
+
+scale {
+  min-width: 220px;
+}
+
+scale trough {
+  background: $bg3;
+
+  min-height: 6px;
+
+  border-radius: 10px;
+}
+
+scale highlight {
+  background: $fg;
+
+  border-radius: 10px;
+}
+
+scale slider {
+  background: $fg-bright;
+
+  min-width: 14px;
+  min-height: 14px;
+
+  border-radius: 50%;
+}
+
+/* =========================================================
+ * BUTTON
+ * ========================================================= */
+
+.audio-mixer button {
+  background: $bg2;
+
+  color: $fg;
+
+  margin-top: 4px;
+  padding: 6px 10px;
+
+  border: 1px solid $border;
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.audio-mixer button:hover {
+  background: $bg3;
+  color: $fg-bright;
+}
+
+.audio-mixer button:active {
+  background: $fg;
+  color: $bg-dark;
+}
+
+/* =========================================================
+ * WALLPAPER
+ * ========================================================= */
+
+.wallpaper-box {
+  background: $bg;
+
+  padding: 16px;
+
+  border: 1px solid $border;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.wallpaper-title {
+  color: $fg-bright;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.wallpaper-btn {
+  background: $bg1;
+
+  color: $fg;
+
+  padding: 10px 14px;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.wallpaper-btn:hover {
+  background: $bg2;
+
+  color: $fg-bright;
+
+  border-color: $border;
+}
+
+.wallpaper-btn:active {
+  background: $fg;
+
+  color: $bg-dark;
+
+  border-color: $fg;
+}
+
+/* =========================================================
+ * GENERIC
+ * ========================================================= */
+
+.animation {
+  color: $fg;
+}
+
+.background {
+  color: $fg;
+}
+
+.media-selector {
+  background: rgba(42, 33, 29, 0.97);
+  border: 1px solid #4a3a32;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.media-selector-title {
+  color: $fg-bright;
+  font-size: 18px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.media-player-item {
+  background: #30251f;
+  color: #d6c4b8;
+  border: 1px solid #4a3a32;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+.media-player-item:hover {
+  background: #3a2d26;
+}
+
+.media-player-name {
+  color: #d6c4b8;
+  margin-left: 12px;
+}
+
+.media-player-subtitle {
+  color: #8f7c70;
+  font-size: 11px;
+  margin-left: 12px;
+}
+
+.media-player-check {
+  color: #d6c4b8;
+  font-size: 14px;
+}
+
+.media-player-check {
+  color: #d6c4b8;
+  font-size: 14px;
+  margin-left: -45px;
+}
+
+.media-controls {
+  margin-top: 8px;
+}
+
+.media-control-button {
+  background: #30251f;
+  color: #d6c4b8;
+  border: 1px solid #4a3a32;
+  border-radius: 8px;
+
+  min-width: 38px;
+  min-height: 32px;
+
+  margin: 0 3px;
+}
+
+.media-control-button:hover {
+  background: #3a2d26;
+  color: #e8d5c7;
+}

@@ -1,0 +1,1 @@
+../../../.config/dotfiles/niri/.config/waybar/modules/media-player.py

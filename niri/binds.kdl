@@ -1,0 +1,98 @@
+binds {
+    // Applications
+    //Mod+Return      { spawn-sh "alacritty --config-file /home/iko/niri-setup/alacritty/default.toml"; }
+    Mod+Return      { spawn "kitty";}
+    Mod+Shift+Return { spawn "kitty" "--title" "Floating Terminal"; }
+    Mod+Ctrl+Return { spawn-sh "fuzzel --config /home/iko/.config/dotfiles/niri/.config/fuzzel/fuzzel.ini"; }
+    Mod+B           { spawn-sh "zen-browser"; }
+    Mod+E           { spawn-sh "nautilus"; }
+    Mod+Backspace           { spawn-sh "/home/iko/.config/dotfiles/niri/.config/scripts/swaylock.sh"; }
+    Mod+C           { spawn-sh "cliphist list | fuzzel --dmenu --config /home/iko/.config/dotfiles/niri/.config/fuzzel/clipboard.ini | cliphist decode | wl-copy"; }
+    Mod+I           { spawn-sh "/home/iko/.config/dotfiles/niri/.config/scripts/change-idle-time.sh"; }
+    Mod+P           { spawn-sh "/home/iko/.config/dotfiles/niri/.config/scripts/change-power-profile.sh"; }
+    Mod+U           { spawn-sh "alacritty --title 'Updater' --config-file /home/iko/.config/dotfiles/niri/.config/alacritty/float.toml -e /home/iko/.config/dotfiles/niri/.config/waybar/modules/install-updates.sh"; }
+    Mod+W           { spawn-sh "/home/iko/.config/dotfiles/niri/.config/scripts/toggle-waybar.sh"; }
+    Mod+Ctrl+W      { spawn-sh "alacritty --title 'Wallpaper Selector' --config-file /home/iko/.config/dotfiles/niri/.config/alacritty/float.toml -e /home/iko/.config/dotfiles/niri/.config/scripts/change-wallpaper.sh"; }
+    Mod+Escape   { spawn-sh "/home/iko/.config/dotfiles/niri/.config/scripts/wlogout.sh"; }
+    Mod+Shift+T     { spawn-sh ".config/dotfiles/niri/.config/scripts/toggle-touchpad.sh"; }
+
+    // Backlight and Audio
+    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "brightnessctl set +5%" ; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl set 5%-" ; }
+    XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"; }
+    XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
+    XF86AudioMute         allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioPlay         allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioPause        allow-when-locked=true { spawn-sh "playerctl pause"; }
+    XF86AudioNext         allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPrev         allow-when-locked=true { spawn-sh "playerctl previous"; }
+
+    // Windows and Columns
+    Mod+Q                { close-window; }
+    Mod+T                { toggle-window-floating; }
+    Mod+M                { maximize-column; }
+    Mod+F                { fullscreen-window; }
+    Mod+H                { focus-column-left; }
+    Mod+L                { focus-column-right; }
+    Mod+J                { focus-window-or-workspace-down; }
+    Mod+K                { focus-window-or-workspace-up; }
+    Mod+Ctrl+H           { move-column-left; }
+    Mod+Ctrl+L           { move-column-right; }
+    Mod+Ctrl+J           { move-window-down; }
+    Mod+Ctrl+K           { move-window-up; }
+    Mod+Home             { focus-column-first; }
+    Mod+End              { focus-column-last; }
+    Mod+Ctrl+Home        { move-column-to-first; }
+    Mod+Ctrl+End         { move-column-to-last; }
+    Mod+Shift+H          { set-column-width "-5%"; }
+    Mod+Shift+L          { set-column-width "+5%"; }
+    Mod+Shift+J          { set-window-height "-5%"; }
+    Mod+Shift+K          { set-window-height "+5%"; }
+    Mod+BracketLeft      { consume-or-expel-window-left; }
+    Mod+BracketRight     { consume-or-expel-window-right; }
+    Mod+Comma            { consume-window-into-column; }
+    Mod+Period           { expel-window-from-column; }
+    Mod+WheelScrollDown  { focus-workspace-down; }
+    Mod+WheelScrollUp    { focus-workspace-up; }
+
+    // Workspaces
+    Mod+Down      { focus-workspace-down; }
+    Mod+Up        { focus-workspace-up; }
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+Ctrl+1         { move-column-to-workspace 1; }
+    Mod+Ctrl+2         { move-column-to-workspace 2; }
+    Mod+Ctrl+3         { move-column-to-workspace 3; }
+    Mod+Ctrl+4         { move-column-to-workspace 4; }
+    Mod+Ctrl+5         { move-column-to-workspace 5; }
+    Mod+Ctrl+6         { move-column-to-workspace 6; }
+    Mod+Ctrl+7         { move-column-to-workspace 7; }
+    Mod+Ctrl+8         { move-column-to-workspace 8; }
+    Mod+Ctrl+9         { move-column-to-workspace 9; }
+    Mod+Ctrl+0         { move-column-to-workspace 10; }
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+    Mod+A              { toggle-overview; }
+
+    // Screenshots
+    Print       { screenshot; }
+    Ctrl+Print  { screenshot-window; }
+    Shift+Print { screenshot-screen; }
+
+    // automation layout
+    Mod+Shift+M { spawn "~/.config/dotfiles/niri/.config/scripts/projec-session.sh"; }
+    // close all window
+    Mod+Shift+Q { spawn "~/.config/dotfiles/niri/.config/scripts/close-all-windows.sh"; }
+
+    // open floating notes using obsidian
+    Mod+N { spawn "~/.local/bin/obsidian-floating-notes.sh"; }
+}

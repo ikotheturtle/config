@@ -1,0 +1,381 @@
+(defvar direction "up")
+
+(defpoll time :interval "1s" "date +'%H:%M'")
+(defpoll date :interval "60s" "date +'%A, %d %B'")
+
+(defpoll selected-player
+  :interval "1s"
+  "cat $XDG_RUNTIME_DIR/waybar-media-player 2>/dev/null")
+
+(defpoll volume :interval "0.2s"
+  "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}'"
+)
+
+(defpoll audio_apps :interval "1s"
+  "sh -c '/home/iko/.config/eww/script/audio_apps.sh'"
+)
+
+(defpoll mic_volume :interval "0.2s"
+  "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{print int($2*100)}'"
+)
+
+(deflisten music
+  "playerctl -p playerctld --follow metadata --format '{{title}} - {{artist}}'"
+)
+
+(defpoll test_simple :interval "1s"
+  "echo test-ok"
+)
+
+
+(defwidget music-mini []
+  (box
+    :class "music-mini"
+    :orientation "v"
+    :halign "center"
+    :valign "center"
+    :width "90%"
+    :spacing 6
+
+    (label
+      :class "music-text"
+      :halign "center"
+      :valign "center"
+      :wrap false
+      :ellipsize "end"
+      :limit-width 44
+      :text music
+    )
+
+    (box
+      :class "music-controls"
+      :halign "center"
+      :spacing 14
+      (button :class "music-btn" :onclick "playerctl -p playerctld previous" "⏮")
+      (button :class "music-btn" :onclick "playerctl -p playerctld play-pause" "⏯")
+      (button :class "music-btn" :onclick "playerctl -p playerctld next" "⏭")
+    )
+  )
+)
+
+
+(defwidget wallpaper-switch []
+  (box
+    :class "wallpaper-box"
+    :orientation "v"
+    :spacing 10
+
+    (label :text "Wallpaper Mode")
+
+    (button
+      :class "wallpaper-btn"
+      :onclick '~/.config/eww/script/wallpaper_animation.sh'
+      "Animation"
+    )
+
+    (button
+      :class "wallpaper-btn"
+      :onclick '~/.config/eww/script/wallpaper_background.sh'
+      "Background"
+    )
+  )
+)
+
+
+
+(defwidget audio-mixer []
+  (box
+    :class "audio-mixer"
+    :orientation "v"
+    :spacing 14
+    :halign "center"
+
+    ;; SPEAKER
+    (box :orientation "v" :spacing 6
+      (label :text "Speaker")
+
+      (scale
+        :min 0
+        :max 100
+        :value volume
+        :width 220
+        :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
+      )
+
+      (button
+        :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        "Mute Speaker"
+      )
+    )
+
+    ;; MIC
+    (box :orientation "v" :spacing 6
+      (label :text "Mic")
+
+      (scale
+        :min 0
+        :max 100
+        :value mic_volume
+        :width 220
+        :onchange "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ {}%"
+      )
+
+      (button
+        :onclick "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        "Mute Mic"
+      )
+    )
+  )
+)
+
+
+(defwindow audio_popup
+  :class "audio-popup"
+  :monitor 0
+  :exclusive false
+  :focusable false
+  :windowtype "dock"
+  :geometry (geometry
+    :x "50%"
+    :y "40px"
+    :anchor "top center"
+  )
+  (audio-mixer)
+)
+
+
+(defwindow wallpaper_popup
+  :monitor 0
+  :geometry (geometry
+    :x "200px"
+    :y "19px"
+    :width "200px"
+    :height "160px"
+    :anchor "top left"
+  )
+  :stacking "overlay"
+  :exclusive false
+  (wallpaper-switch)
+)
+
+(defwidget media-player-selector []
+  (box
+    :class "media-selector"
+    :orientation "v"
+    :space-evenly false
+
+    ;; TITLE
+    (label
+      :class "media-selector-title"
+      :halign "center"
+      :text "MEDIA PLAYER"
+    )
+
+    ;; =========================
+    ;; SPOTIFY
+    ;; =========================
+    (button
+      :class "media-player-item"
+      :halign "fill"
+      :onclick "/home/iko/.config/waybar/modules/select-media-player.sh spotify"
+
+      (box
+        :orientation "h"
+        :space-evenly false
+        :hexpand true
+
+        ;; LEFT SPACER
+        (box
+          :width "20px"
+        )
+
+        ;; TEXT
+        (box
+          :orientation "v"
+          :halign "start"
+          :valign "center"
+
+          (label
+            :class "media-player-name"
+            :halign "start"
+            :text "Spotify"
+          )
+
+          (label
+            :class "media-player-subtitle"
+            :halign "start"
+            :text "Spotify Desktop"
+          )
+        )
+
+        ;; PUSH ICON TO RIGHT
+        (box
+          :hexpand true
+        )
+
+        ;; SELECTED INDICATOR
+        (label
+          :class "media-player-check"
+          :width "20px"
+          :halign "center"
+          :text {selected-player == "spotify" ? "" : ""}
+        )
+      )
+    )
+
+    ;; =========================
+    ;; FIREFOX
+    ;; =========================
+    (button
+      :class "media-player-item"
+      :halign "fill"
+      :onclick "/home/iko/.config/waybar/modules/select-media-player.sh firefox.instance_1_61"
+
+      (box
+        :orientation "h"
+        :space-evenly false
+        :hexpand true
+
+        ;; LEFT SPACER
+        (box
+          :width "20px"
+        )
+
+        ;; TEXT
+        (box
+          :orientation "v"
+          :halign "start"
+          :valign "center"
+
+          (label
+            :class "media-player-name"
+            :halign "start"
+            :text "Firefox"
+          )
+
+          (label
+            :class "media-player-subtitle"
+            :halign "start"
+            :text "YouTube Music"
+          )
+        )
+
+        ;; PUSH ICON TO RIGHT
+        (box
+          :hexpand true
+        )
+
+        ;; SELECTED INDICATOR
+        (label
+          :class "media-player-check"
+          :width "20px"
+          :halign "center"
+          :text {selected-player == "firefox.instance_1_61" ? "" : ""}
+        )
+      )
+    )
+
+    ;; =========================
+    ;; MEDIA CONTROLS
+    ;; =========================
+    (box
+      :class "media-controls"
+      :orientation "h"
+      :halign "center"
+      :space-evenly false
+
+      ;; PREVIOUS
+      (button
+        :class "media-control-button"
+        :onclick "playerctl --player=\"$(cat \"$XDG_RUNTIME_DIR/waybar-media-player\")\" previous"
+        (label
+          :text "⏮"
+        )
+      )
+
+      ;; PLAY / PAUSE
+      (button
+        :class "media-control-button"
+        :onclick "playerctl --player=\"$(cat \"$XDG_RUNTIME_DIR/waybar-media-player\")\" play-pause"
+        (label
+          :text "⏯"
+        )
+      )
+
+      ;; NEXT
+      (button
+        :class "media-control-button"
+        :onclick "playerctl --player=\"$(cat \"$XDG_RUNTIME_DIR/waybar-media-player\")\" next"
+        (label
+          :text "⏭"
+        )
+      )
+    )
+  )
+)
+
+(defwindow media-player-selector
+  :monitor 0
+  :geometry (geometry
+    :width "280px"
+    :height "250px"
+    :anchor "top left"
+    :x "300px"
+    :y "10px")
+  :stacking "fg"
+  :focusable true
+
+  (media-player-selector)
+)
+
+(defwindow clock-popup
+  :class "clock-popup-window"
+  :geometry (geometry
+    :x "0%"
+    :y "5px"
+    :width "25%"
+    :height "490px"
+    :anchor "top center"
+  )
+  :monitor 0
+  :exclusive false
+  :focusable false
+  :resizable false
+  (box
+    :orientation "v"
+    :spacing 5
+    :halign "center"
+    :valign "center"
+    :space-evenly false
+
+    ;; Kotak untuk jam
+    (box
+      :height "60px"
+      :halign "center"
+      :valign "center"
+      (label :class "clock" :text "${time}")
+    )
+
+    (box :height "3px" :width "90%" :class "line-sep")
+
+    ;; Kotak untuk tanggal
+    (box
+      :height "50px"
+      :halign "center"
+      :valign "center"
+      (label :class "date" :text "${date}")
+    )
+
+    ;; Kotak untuk kalender
+    (box
+      :height "400px"
+      :vexpand false
+      (eventbox
+        :onscroll "bash ~/.config/eww/scripts/change_month.sh ${direction}"
+        (calendar :class "calendar")
+      )
+    )
+  )
+)
+
+

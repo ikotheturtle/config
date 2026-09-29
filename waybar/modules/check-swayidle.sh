@@ -1,0 +1,1 @@
+../../../.config/dotfiles/niri/.config/waybar/modules/check-swayidle.sh

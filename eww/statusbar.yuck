@@ -1,0 +1,218 @@
+;; TODO: have a scratchpad widget that appears only if there's a window there !
+
+(defwindow statusbar
+    :monitor 0
+    :stacking "fg"
+    :exclusive true
+    :namespace "eww-statusbar"
+    :geometry (geometry :height "1%" 
+                        :width "100%"
+                        :anchor "top center" 
+              )
+    (bar_layout)
+)
+
+(defwidget bar_layout []
+    (box
+        :class "sbar"
+        :space-evenly true ;; false doesn't let center stay at the global center, weirdly enough
+        :hexpand true
+        :vexpand true
+        (bar_left
+        )
+        (bar_middle
+        )
+        (bar_right
+        )
+    )
+)
+
+;;                      ;;
+;; Left side of the bar ;;
+;;                      ;;
+(defwidget bar_left []
+    (box :class "sbar-left"
+         :halign "start"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+         (workspaces :array workspacesArray)
+    )
+)
+
+;; workspaces
+
+(deflisten workspacesArray :initial "${[1]}"
+  `/home/laio/.config/eww/scripts/workspaces.sh`)
+
+(defwidget workspaces [array]
+    (box :class "sbar-ws-box"
+         :orientation "h"
+         :space-evenly false ;; maybe find a better way to have equal space workspace buttons, scss "min-width" could be an option
+         :hexpand true
+         :vexpand true
+
+         (for entry in array
+             (button :onclick `swaymsg workspace "${entry.name}"`
+                     :space-evenly false
+                     :hexpand true
+                     :vexpand true
+                     :width 31
+                     :class {entry.focused ? "sbar-ws-focused" : "sbar-ws-unfocused"}
+                     `${entry.name}`
+             )
+         )
+    )
+)
+
+;;                   ;;
+;; Center of the bar ;;
+;;                   ;;
+(defwidget bar_middle []
+    (box :class "sbar-middle"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+         :halign "center"
+         (window_title)
+    )
+)
+
+(deflisten windowInfo :initial "Bienvenue !"
+    `/home/laio/.config/eww/scripts/windows.sh`
+    ;; though sometimes it doesn't work (e.g. when cmus changes track in background, it becomes the output)
+)
+(defwidget window_title []
+    (box :class "sbar-win-title"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+         (label
+                 :space-evenly false
+                 :hexpand true
+                 :vexpand true
+                 :limit-width 40
+                 :class "sbar-win-title-label"
+                 :text "${windowInfo}"
+                 ;;:tooltip "${windowInfo}" or sthg similar
+         )
+    )
+)
+
+;;                       ;;
+;; Right side of the bar ;;
+;;                       ;;
+(defwidget bar_right []
+    (box :class "sbar-right"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+         :halign "end"
+         (cpu)
+         (ram)
+         (battery)
+         (time_date)
+         (system_tray)
+    )
+)
+
+;; CPU utilisation
+(defwidget cpu []
+    (box :class "sbar-cpu"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+        (circular-progress 
+            :class "sbar-cpu-bar"
+            :space-evenly false
+            :hexpand true
+            :vexpand true
+            :width 30
+            :value {EWW_CPU.avg}
+            :start-at 25
+            :thickness 2
+            "•"
+        )
+      "cpu"
+    )
+)
+
+;; RAM utilisation
+(defwidget ram []
+    (box :class "sbar-ram"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+        (circular-progress 
+            :class "sbar-ram-bar"
+            :space-evenly false
+            :hexpand true
+            :vexpand true
+            :width 30
+            :value {EWW_RAM.used_mem_perc}
+            :start-at 25
+            :thickness 2
+            "•"
+        )
+      "ram"
+    )
+)
+
+;; Battery
+(defwidget battery []
+    (box :class "sbar-bat"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+         :tooltip "${EWW_BATTERY.BAT0.capacity}%"
+        (circular-progress 
+            :class {EWW_BATTERY.BAT0.status == "Charging" ? "sbar-bat-bar-charging" : "sbar-bat-bar"}
+            :space-evenly false
+            :hexpand true
+            :vexpand true
+            :width 30
+            :height 19
+            :value {EWW_BATTERY.BAT0.capacity}
+            :start-at 25
+            :thickness 2
+            (label :text {EWW_BATTERY.BAT0.status == "Charging" ? "󱐋" : "•"}
+                   :space-evenly false
+                   :halign "center"
+                   :valign "center"
+            )
+        )
+      "bat"
+    )
+)
+
+;; Time and date
+(defpoll timeDate
+    :interval "1s"
+    :initial "???"
+    :run-while time-visible
+    "date +%H:%M:%S"
+)
+(defwidget time_date []
+    (box :class "sbar-timedate"
+         :space-evenly false
+         :hexpand true
+         :vexpand true
+    "${timeDate}"
+    )
+)
+
+;; Systray
+(defwidget system_tray []
+    (box :class "sbar-systray"
+         :space-evenly false
+         :hexpand false
+         :vexpand false
+         :max-height 10
+        (systray
+            :space-evenly false
+            :hexpand false
+            :vexpand false
+            :height 10
+        )
+    )
+)

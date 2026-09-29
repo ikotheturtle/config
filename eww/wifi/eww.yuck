@@ -1,0 +1,59 @@
+(defpoll wifi_list :interval "10s" "bash ~/.config/eww/wifi/wifi-list.sh")
+
+(defwidget wifi-list []
+  (box
+    :orientation "v"
+    :spacing 5
+    ;; Iterasi setiap baris dari wifi_list
+    (for w in wifi_list
+      (let ssid (split w "|0")
+        signal (split w "|1"))
+        (box
+          :orientation "h"
+          :spacing 10
+          (label :text ssid)
+          (progress
+            :value (parse-int signal)
+            :max 100
+            :width 50
+            :height 8)))))
+
+
+
+
+(defwindow wifi 
+  :class "wifi-popup-window" 
+  :geometry (
+    :x "10.8%"
+    :y "18px" 
+    :width "18%"
+    :height "520px"
+    :anchor "top right"
+  )
+  :monitor 0
+  :exclusive false
+  :focusable false
+  :resizable false
+  (wifi-list)
+)
+
+
+(defpoll wifi_list :interval "10s" "bash ~/.config/eww/wifi/wifi-list.sh")
+
+(defwidget wifi-list []
+  (box
+    :orientation "v"
+    :spacing 5
+    ;; Iterasi setiap baris dari wifi_list
+    (for w in wifi_list
+      (let ssid (split w "|0")
+        signal (split w "|1"))
+        (box
+          :orientation "h"
+          :spacing 10
+          (label :text ssid)
+          (progress
+            :value (parse-int signal)
+            :max 100
+            :width 50
+            :height 8)))))
