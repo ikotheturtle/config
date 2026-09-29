@@ -1,0 +1,243 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   WAYBAR
+   ========================================================= */
+
+window#waybar {
+  background: transparent;
+  color: #d6c4b8;
+
+  /* makes the bar sit closer to the screen edge */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* =========================================================
+   COMMON MODULE
+   ========================================================= */
+
+#workspaces,
+#window,
+#clock,
+#custom-media,
+#battery,
+#bluetooth,
+#backlight,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#custom-hourglass {
+  background: rgba(42, 33, 29, 0.94);
+
+  color: #d6c4b8;
+
+  border: 1px solid #4a3a32;
+  border-radius: 8px;
+
+  padding: 0 12px;
+  margin: 5px 0;
+}
+
+/* =========================================================
+   WORKSPACES
+   ========================================================= */
+
+#workspaces {
+  background: rgba(42, 33, 29, 0.94);
+
+  border: 1px solid #4a3a32;
+  border-radius: 8px;
+
+  padding: 0 4px;
+  margin: 5px 0;
+}
+
+#workspaces button {
+  background: transparent;
+  color: #d6c4b8;
+
+  border: none;
+  border-radius: 6px;
+
+  min-width: 24px;
+  min-height: 26px;
+
+  padding: 0 6px;
+  margin: 3px 1px;
+
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#workspaces button:hover {
+  background: #3a2d26;
+  color: #e8d5c7;
+}
+
+#workspaces button.active {
+  background: #d6c4b8;
+  color: #1c1714;
+
+  font-weight: 800;
+}
+
+#workspaces button.focused {
+  background: #d6c4b8;
+  color: #1c1714;
+}
+
+#workspaces button.urgent {
+  background: #8f7c70;
+  color: #1c1714;
+}
+
+/* =========================================================
+   ACTIVE WINDOW
+   ========================================================= */
+
+#window {
+  color: #d6c4b8;
+
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+/* =========================================================
+   CLOCK
+   ========================================================= */
+
+#clock {
+  color: #e8d5c7;
+
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* =========================================================
+   BATTERY
+   ========================================================= */
+
+#battery {
+  color: #d6c4b8;
+}
+
+#battery.warning,
+#battery.critical {
+  color: #e8d5c7;
+}
+
+/* =========================================================
+   BRIGHTNESS
+   ========================================================= */
+
+#backlight {
+  color: #d6c4b8;
+}
+
+/* =========================================================
+   NETWORK
+   ========================================================= */
+
+#network {
+  color: #d6c4b8;
+}
+#network:hover {
+  background: #3a2d26;
+  color: #e8d5c7;
+}
+/* =========================================================
+   CPU
+   ========================================================= */
+
+#cpu {
+  color: #d6c4b8;
+}
+
+#cpu.warning,
+#cpu.critical {
+  color: #e8d5c7;
+}
+
+/* =========================================================
+   MEMORY
+   ========================================================= */
+
+#memory {
+  color: #d6c4b8;
+}
+
+#memory.warning,
+#memory.critical {
+  color: #e8d5c7;
+}
+
+/* =========================================================
+   HOURGLASS
+   ========================================================= */
+
+#custom-hourglass {
+  color: #d6c4b8;
+
+  padding-left: 13px;
+  padding-right: 13px;
+
+  min-width: 16px;
+}
+
+#custom-hourglass:hover {
+  background: #3a2d26;
+  color: #e8d5c7;
+}
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+#custom-media {
+  color: #d6c4b8;
+
+  padding-left: 14px;
+  padding-right: 14px;
+}
+#custom-media:hover {
+  background: #3a2d26;
+  color: #e8d5c7;
+}
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+#pulseaudio:hover {
+  background: #3a2d26;
+  color: #e8d5c7;
+}
+
+#pulseaudio.muted {
+  color: #8f7c70;
+}
+/* =========================================================
+   BLUETOOTH
+   ========================================================= */
+
+#bluetooth {
+  color: #d6c4b8;
+}
+
+#bluetooth:hover {
+  color: #e8d5c7;
+}
+
+#bluetooth.connected {
+  color: #e8d5c7;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+  color: #8f7c70;
+}
