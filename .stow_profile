@@ -1,0 +1,8 @@
+# Edit this file to select packages to manage.
+# Comment out (#) or delete packages you do not want on this machine.
+shell
+zed
+niri
+neovim
+containers
+xdg-desktop-portal

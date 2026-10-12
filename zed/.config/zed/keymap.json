@@ -1,0 +1,116 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl ctrl": "editor::ToggleFocus",
+      "alt-w": "pane::CloseActiveItem",
+      "cmd-w": "pane::CloseActiveItem",
+      "shift shift": "file_finder::Toggle",
+      "shift ctrl": "outline::Toggle",
+      "ctrl-!": "project_panel::CollapseAllEntries",
+      "alt-m": "workspace::ToggleBottomDock",
+      "alt-n": "terminal_panel::ToggleFocus",
+      "alt-r": "workspace::ToggleRightDock",
+      "alt-g": "git_panel::ToggleFocus",
+      "alt-e": "project_panel::ToggleFocus",
+      "alt-o": "outline_panel::ToggleFocus",
+      "alt-b": "workspace::NewTerminal",
+    },
+  },
+  {
+    "context": "OutlinePanel",
+    "bindings": {
+      "h": "menu::SelectParent",
+      "k": "menu::SelectPrevious",
+      "j": "menu::SelectNext",
+      "l": "menu::Confirm",
+
+      "cmd-backspace": "tab_switcher::CloseSelectedItem",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "escape": "project_panel::ToggleFocus",
+      "enter": "project_panel::Open",
+      "o": "project_panel::NewDirectory",
+      "a": "project_panel::NewFile",
+      "r": "project_panel::Rename",
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "d": "project_panel::Delete",
+      "l": "project_panel::ExpandSelectedEntry",
+      "h": "project_panel::CollapseSelectedEntry",
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious",
+      // "shift-d": "project_panel::Delete"
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "alt-h": "workspace::ActivatePaneLeft",
+      "alt-l": "workspace::ActivatePaneRight",
+      "alt-k": "workspace::ActivatePaneUp",
+      "alt-j": "workspace::ActivatePaneDown",
+      "alt-shift-h": ["workspace::MoveItemToPaneInDirection", { "direction": "left" }],
+      "alt-shift-l": ["workspace::MoveItemToPaneInDirection", {"direction": "right" }]
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "alt-b": "workspace::NewTerminal",
+      "cmd-t": "terminal_panel::ToggleFocus",
+      "ctrl-t": "terminal_panel::ToggleFocus",
+      "cmd-w": "pane::CloseActiveItem",
+      "alt-w": "pane::CloseActiveItem",
+      "cmd-k": "terminal::Clear",
+      "ctrl-k": "terminal::Clear",
+    },
+  },
+  {
+    "context": "Editor && menu",
+    "bindings": {
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrevious",
+      "escape": "editor::Cancel",
+    },
+  },
+  {
+    "context": "VimControl && !menu && vim_mode != operator",
+    "bindings": {
+      "w": "vim::NextSubwordStart",
+      "b": "vim::PreviousSubwordStart",
+      "e": "vim::NextSubwordEnd",
+      "g e": "vim::PreviousSubwordEnd",
+    },
+  },
+  {
+    "context": "Editor && !menu",
+    "bindings": {
+      // "ctrl-f": "buffer_search::Deploy", // vim default: page down
+      "ctrl-c": "editor::Copy", // vim default: return to normal mode
+      // "ctrl-x": "editor::Cut", // vim default: decrement
+      "ctrl-shift-v": "editor::Paste", // vim default: visual block mode
+      "ctrl-shift-a": "editor::SelectAll", // vim default: increment
+      // "ctrl-y": "editor::Undo", // vim default: line up
+      // "ctrl-t": "project_symbols::Toggle", // vim default: go to older tag
+      // "ctrl-o": "workspace::Open", // vim default: go back
+      // "ctrl-s": "workspace::Save", // vim default: show signature
+      "ctrl-b": "workspace::ToggleLeftDock", // vim default: down
+    },
+  },
+  {
+    "context": "FileFinder",
+    "bindings": {
+      "h": "menu::SelectParent",
+      "k": "menu::SelectPrevious",
+      "j": "menu::SelectNext",
+      "l": "menu::Confirm",
+
+      "cmd-backspace": "tab_switcher::CloseSelectedItem",
+    },
+  },
+]

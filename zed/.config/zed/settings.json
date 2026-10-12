@@ -1,0 +1,157 @@
+{
+  "agent_servers": {
+    "opencode": {
+      "default_config_options": {
+        "effort": "medium",
+        "model": "opencode/muse-spark-1.3-contributor-free"
+      },
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
+  "theme": "Gruvbox Dark Hard",
+  "lsp": {
+
+    "discord_presence": {
+          "initialization_options": {
+            "application_id": "1263505205522337886",
+
+            "state": "Working on {filename}",
+            "details": "In {workspace}",
+
+            "large_image": "{base_icons_url}/{language:lo}.png",
+            "large_text": "{language:u}",
+
+            "small_image": "{base_icons_url}/zed.png",
+            "small_text": "Zed",
+
+            "idle": {
+              "timeout": 3600,
+              "action": "change_activity",
+              "state": "Idling",
+              "details": "In Zed",
+              "large_image": "{base_icons_url}/zed.png",
+              "large_text": "Zed",
+              "small_image": "{base_icons_url}/idle.png",
+              "small_text": "Idle"
+            },
+
+            "git_integration": true
+          }
+        },
+
+    "texlab": {
+      "settings": {
+        "texlab": {
+          "build": {
+            // "onSave": true,
+            // "forwardSearchAfter": true,
+            "executable": "latexmk",
+            "args": [
+              "-pdf",
+              "-f",
+              "synctex=1",
+              "-interaction=nonstopmode",
+              "-output-directory=build",
+              "main.tex"
+            ],
+            "onSave": true
+          },
+          "forwardSearch": {
+            "executable": "zathura",
+            "args": ["--synctex-forward", "%l:1:%f", "-x", "zed %%{input}:%%{line}", "%p"],
+          },
+        },
+      },
+    },
+  },
+  "cli_default_open_behavior": "existing_window",
+  "preferred_line_length": 100,
+  "soft_wrap": "bounded",
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "ui_font_family": "JetBrainsMono Nerd Font",
+  "agent": {
+    "default_width": 550.0,
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "dock": "right",
+    "default_width": 550.0,
+    "button": false,
+  },
+  "debugger": {
+    "dock": "right",
+  },
+  "git_panel": {
+    "dock": "right",
+    "tree_view": true,
+    "default_width": 550.0,
+  },
+  "outline_panel": {
+    "indent_size": 15.0,
+    "default_width": 550.0,
+    "dock": "right",
+  },
+  "project_panel": {
+    "indent_guides": {
+      "show": "never",
+    },
+    "hide_root": false,
+    "scrollbar": {
+      "horizontal_scroll": true,
+      "show": "never",
+    },
+    "indent_size": 10.0,
+    "entry_spacing": "standard",
+    "default_width": 550.0,
+    "dock": "right",
+  },
+  "terminal": {
+    "shell": {
+      "program": "zsh",
+    },
+  },
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "vim_mode": true,
+  "vim": {
+    "default_mode": "normal",
+    "use_system_clipboard": "never",
+    "use_smartcase_find": true,
+    "use_regex_search": true,
+    "gdefault": true,
+    "toggle_relative_line_numbers": true,
+    "highlight_on_yank_duration": 50,
+  },
+  "cursor_blink": false,
+  "relative_line_numbers": "enabled",
+  "scrollbar": { "show": "auto" },
+  "vertical_scroll_margin": 8,
+  "ui_font_size": 18.0,
+  "buffer_font_size": 18.0,
+  "prettier": {
+    "allowed": true,
+  },
+  "languages": {
+    "PHP": {
+      "language_servers": ["intelephense", "!phpactor", "!phptools", "..."],
+      "tab_size": 4,
+      "hard_tabs": false,
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "bash",
+          "arguments": [
+            "-c",
+            "cat > {buffer_path} && ./vendor/bin/pint --quiet {buffer_path} && cat {buffer_path}",
+          ],
+        },
+      },
+    },
+    "Go": {
+      "format_on_save": "on",
+      "formatter": "language_server"
+    },
+  },
+}

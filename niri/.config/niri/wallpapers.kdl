@@ -1,0 +1,7 @@
+// background for workspace and backdrop
+spawn-sh-at-startup "awww-daemon & awww img /home/hank/Code/niri-setup/wallpapers/backdrop.jpg"
+//spawn-sh-at-startup "swaybg -i /home/hank/Code/niri-setup/wallpapers/beach.jpg"
+layer-rule {
+    match namespace="^awww-daemon$"
+    place-within-backdrop true
+}
