@@ -1,7 +1,7 @@
 binds {
     // Applications
     //Mod+Return      { spawn-sh "alacritty --config-file /home/iko/niri-setup/alacritty/default.toml"; }
-    Mod+Return        { spawn "kitty";}
+    Mod+Return        { spawn "kitty"; }
     Mod+Shift+Return  { spawn "kitty" "--title" "Floating Terminal"; }
     Mod+R             { spawn-sh "fuzzel --config /home/iko/.config/dotfiles/niri/.config/fuzzel/fuzzel.ini"; }
     Mod+B             { spawn-sh "zen-browser"; }

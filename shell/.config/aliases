@@ -7,10 +7,13 @@ alias la='ls -A'
 alias ll='ls -l'
 alias llah='ls -llah'
 alias ls='ls --color=auto'
+alias lt='tree'
 alias grep='grep --color=auto'
 alias cpwd='echo -n $(pwd) | wl-copy'
 
 alias s='sudo'
+
+alias search='/usr/bin/s'
 
 alias r='rsync -avzP'
 alias p='sudo pacman'

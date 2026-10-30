@@ -48,6 +48,25 @@ pass-fzf() {
     fi
 }
 
+# Copy file contents to clipboard
+cpc() {
+    if (( $# != 1 )); then
+        echo "Usage: cpc <file>"
+        return 1
+    fi
+
+    if [[ ! -f "$1" || ! -r "$1" ]]; then
+        echo "Error: file not found or not readable: $1"
+        return 1
+    fi
+
+    wl-copy < "$1" && echo "Copied contents of: $1"
+}
+
+mkdir() {
+    command mkdir -p "$@"
+}
+
 # Zsh widget wrapper
 fp-widget() { fp; }
 pass-fzf-widget() { pass-fzf; }
@@ -56,6 +75,10 @@ zle -N pass-fzf
 
 bindkey '^g' fp-widget
 bindkey '^p' pass-fzf
+
+# Ctrl + Backspace: delete previous word
+bindkey '^H' backward-kill-word
+bindkey '^W' backward-kill-word
 
 eval "$(fnm env --use-on-cd --shell zsh)"
 # Load and initialise completion system

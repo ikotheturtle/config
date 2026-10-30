@@ -109,6 +109,7 @@
     "dock": "right",
   },
   "terminal": {
+    "font_size": 16.0,
     "shell": {
       "program": "zsh",
     },
@@ -129,7 +130,7 @@
   "scrollbar": { "show": "auto" },
   "vertical_scroll_margin": 8,
   "ui_font_size": 18.0,
-  "buffer_font_size": 18.0,
+  "buffer_font_size": 16.0,
   "prettier": {
     "allowed": true,
   },

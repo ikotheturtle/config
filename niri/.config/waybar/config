@@ -116,7 +116,8 @@
        "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
        "tooltip-format-disconnected": "Disconnected",
        "max-length": 50,
-       "on-click": "alacritty --title nmtui --config-file /home/iko/.config/dotfiles/niri/.config/alacritty/float.toml -e nmtui connect",
+       "on-click": "rofi -show wifi-menu-mode -theme ~/.config/rofi/wifi-dashboard.rasi"
+       // "on-click": "alacritty --title nmtui --config-file /home/iko/.config/dotfiles/niri/.config/alacritty/float.toml -e nmtui connect",
      },
     // ─────────────────────────────────────
     // CPU
